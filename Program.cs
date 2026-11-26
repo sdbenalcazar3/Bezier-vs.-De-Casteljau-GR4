@@ -1,4 +1,6 @@
 ﻿using ComparadorBezierDeCasteljau.Vistas;
+using ComparadorBezierDeCasteljau.Controladores;
+using ComparadorBezierDeCasteljau.Modelos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +19,24 @@ namespace ComparadorBezierDeCasteljau
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormularioPrincipal());
+
+            FormularioPrincipal vista = new FormularioPrincipal();
+            EstadoEscena escena = new EstadoEscena();
+            EvaluadorBernstein evaluadorBernstein = new EvaluadorBernstein();
+            EvaluadorDeCasteljau evaluadorDeCasteljau = new EvaluadorDeCasteljau();
+            ServicioBenchmark servicioBenchmark = new ServicioBenchmark(
+                evaluadorBernstein,
+                evaluadorDeCasteljau);
+
+            new ControladorCurvas(
+                vista,
+                escena,
+                evaluadorBernstein,
+                evaluadorDeCasteljau,
+                servicioBenchmark);
+            new ControladorBenchmark(vista, escena, servicioBenchmark);
+
+            Application.Run(vista);
         }
     }
 }
