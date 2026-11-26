@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ComparadorBezierDeCasteljau.Modelos
 {
-    internal class NivelInterpolacion
+    public class NivelInterpolacion
     {
+        public int Nivel { get; }
+        public IReadOnlyList<Punto2D> Puntos { get; }
+
+        public NivelInterpolacion(int nivel, IReadOnlyList<Punto2D> puntos)
+        {
+            Nivel = nivel;
+            Puntos = puntos;
+        }
     }
 }
